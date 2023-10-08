@@ -1,0 +1,3 @@
+#!/bin/cat
+
+echo "myself"

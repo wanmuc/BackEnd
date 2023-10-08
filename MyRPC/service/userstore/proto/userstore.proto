@@ -1,0 +1,52 @@
+syntax = "proto3";
+import "base.proto";
+package MySvr.UserStore;
+
+message User {
+  string user_id = 1;     // 用户id
+  string nick_name = 2;   // 昵称
+  string password = 3;    // 密码
+}
+
+message CreateUserRequest {
+  User user = 1;         // 用户信息
+}
+
+message CreateUserResponse {
+  string message = 1;    // 返回消息，成功时为success，失败时为对应的错误信息
+  string user_id = 2;    // 用户id
+}
+
+message UpdateUserRequest {
+  User user = 1;         // 用户信息
+}
+
+message UpdateUserResponse {
+  string message = 1;    // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message ReadUserRequest {
+  string user_id = 1;    // 用户id
+}
+
+message ReadUserResponse {
+  string message = 1;    // 返回消息，成功时为success，失败时为对应的错误信息
+  User user = 2;         // 用户信息
+}
+
+message DeleteUserRequest {
+  string user_id = 1;     // 用户id
+}
+
+message DeleteUserResponse {
+  string message = 1;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+service UserStore {
+  option (MySvr.Base.Port) = 1695;
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc ReadUser(ReadUserRequest) returns (ReadUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+

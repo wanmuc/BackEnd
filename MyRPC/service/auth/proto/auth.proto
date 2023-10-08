@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "base.proto";
+package MySvr.Auth;
+
+message GenTicketRequest {
+  string user_id = 1;     // 用户id
+  int32  expire_time = 2; // 过期时间，单位秒
+}
+
+message GenTicketResponse {
+  string ticket = 1;      // 生成的票据
+  string message = 2;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message VerifyTicketRequest {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 票据
+}
+
+message VerifyTicketResponse {
+  string message = 1;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message UpdateTicketRequest {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 票据
+}
+
+message UpdateTicketResponse {
+  string ticket = 1;      // 新的票据
+  string message = 2;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+service Auth {
+  option (MySvr.Base.Port) = 1691;
+  rpc GenTicket(GenTicketRequest) returns (GenTicketResponse);
+  rpc VerifyTicket(VerifyTicketRequest) returns (VerifyTicketResponse);
+  rpc UpdateTicket(UpdateTicketRequest) returns (UpdateTicketResponse);
+}
+

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.ServiceOptions {
+  int32 Port = 50001; // 扩展服务选项，新增一个Port字段，用于设置服务监听的端口值
+}
+
+extend google.protobuf.MethodOptions {
+  /* 扩展方法选项
+   * 1表示RR(Request-Response)模式，ps：默认模式
+   * 2表示Oneway(单向调用，无回包)模式
+   * 3表示FR(Fast-Response)模式
+   */
+  int32 MethodMode = 50001;
+}
+
+package MySvr.Base;
+
+message TraceStack {
+  int32   parent_id    = 1;     //调用方分布式调用栈id
+  int32   current_id   = 2;     //被调方分布式调用栈id
+  string  service_name = 3;     //服务名称
+  string  rpc_name     = 4;     //rpc名称
+  int32   status_code  = 5;     //rpc执行结果
+  string  message      = 6;     //rpc执行结果的描述
+  int64   spend_us     = 7;     //接口调用耗时，单位微秒(千分之一毫秒)
+  bool    is_batch     = 8;     //是否批量执行
+}
+
+message Context {
+  string log_id                   = 1;    //请求id，唯一标识一次请求
+  string service_name             = 2;    //要调用的服务名称
+  string rpc_name                 = 3;    //要调用的接口名称
+  int32  status_code              = 4;    //请求的返回的状态码，应答数据时使用
+  int32  current_stack_id         = 5;    //当前分布式调用栈id
+  int32  parent_stack_id          = 6;    //上游分布式调用栈id
+  int32  stack_alloc_id           = 7;    //当前分布式调用栈分配的id，初始值为0
+  repeated TraceStack trace_stack = 8;    //分布式调用栈数据，用于还原整个分布式调用栈
+}
+
+message OneWayResponse {} // 空message用于Oneway模式下的response占位
+message FastRespResponse {} // 空message用于FR模式下的response占位

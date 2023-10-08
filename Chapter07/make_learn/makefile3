@@ -1,0 +1,12 @@
+SOURCES = $(wildcard *.c)  
+OBJS = $(patsubst %.c,%.o,$(SOURCES))  
+TARGET = mySort  
+CC = gcc  
+CFLAGS = -g
+$(TARGET) : $(OBJS)   
+	$(CC) $(CFLAGS) -o $@ $^
+$(OBJS) : %.o : %.c  
+	$(CC) $(CFLAGS) -c $< -o $@
+clean :  
+	rm -rf $(OBJS) $(TARGET)
+.PHONY : clean

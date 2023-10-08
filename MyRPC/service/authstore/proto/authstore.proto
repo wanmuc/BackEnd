@@ -1,0 +1,33 @@
+syntax = "proto3";
+import "base.proto";
+package MySvr.AuthStore;
+
+message Ticket {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 票据
+}
+
+message SetTicketRequest {
+  Ticket ticket = 1;      // 用户票据
+  int32 expire_time = 2;  // 过期时间
+}
+
+message SetTicketResponse {
+  string message = 1;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message GetTicketRequest {
+  string user_id = 1;     // 用户id
+}
+
+message GetTicketResponse {
+  Ticket ticket = 1;      // 用户票据
+  string message = 2;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+service AuthStore {
+  option (MySvr.Base.Port) = 1692;
+  rpc SetTicket(SetTicketRequest) returns (SetTicketResponse);
+  rpc GetTicket(GetTicketRequest) returns (GetTicketResponse);
+}
+

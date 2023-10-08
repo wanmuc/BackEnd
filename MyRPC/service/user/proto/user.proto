@@ -1,0 +1,58 @@
+syntax = "proto3";
+import "base.proto";
+package MySvr.User;
+
+message CreateRequest {
+  string nick_name = 1;     // 昵称
+  string password = 2;      // 密码
+}
+
+message CreateResponse {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 生成的票据，可以用于后续的操作
+  string message = 3;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message UpdateRequest {
+  string user_id = 1;     // 用户id
+  string nick_name = 2;   // 最新的昵称
+  string password = 3;    // 校验的密码，后面扩展使用
+  string ticket = 4;      // 校验的票据
+}
+
+message UpdateResponse {
+  string message = 1;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message ReadRequest {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 票据
+}
+
+message ReadResponse {
+  string nick_name = 1;   // 昵称
+  string message = 2;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message DeleteRequest {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 票据
+}
+
+message DeleteResponse {
+  string message = 1;     // 返回消息，成功时为success，失败时为对应的错误信息
+}
+
+message TicketRenewalRequest {
+  string user_id = 1;     // 用户id
+  string ticket = 2;      // 旧的票据
+}
+
+service User {
+  option (MySvr.Base.Port) = 1694;
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc Read(ReadRequest) returns (ReadResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+

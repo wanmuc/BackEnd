@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "base.proto";
+package MySvr.Echo;
+
+message EchoMySelfRequest {
+  string message = 1;  // 需要回显的消息
+}
+
+message EchoMySelfResponse {
+  string message = 1;  // 回显的消息
+}
+
+message OneWayMessage {
+  string message = 1; // Oneway消息
+}
+
+message FastRespRequest {
+  string message = 1; // FastResp消息
+}
+
+service Echo {
+  option (MySvr.Base.Port) = 1693;
+  rpc EchoMySelf(EchoMySelfRequest) returns (EchoMySelfResponse);
+  rpc OneWay(OneWayMessage) returns(MySvr.Base.OneWayResponse) {
+    option (MySvr.Base.MethodMode) = 2;
+  };
+  rpc FastResp(FastRespRequest) returns(MySvr.Base.FastRespResponse) {
+    option (MySvr.Base.MethodMode) = 3;
+  };
+}
+

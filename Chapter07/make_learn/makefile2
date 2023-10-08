@@ -1,0 +1,11 @@
+OBJS = main.o sort.o print.o 
+CC = gcc  
+CFLAGS = -g  
+TARGET = mySort
+$(TARGET) : $(OBJS)   
+	$(CC) $(CFLAGS) -o $@ $^  
+$(OBJS) : %.o : %.c  
+	$(CC) $(CFLAGS) -c $< -o $@  
+clean :  
+	rm -rf $(TARGET) $(OBJS)
+.PHONY : clean
