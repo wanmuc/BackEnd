@@ -24,7 +24,8 @@ bool oneway;
 bool fastResp;
 
 void usage() {
-  cout << R"(myrpct -service_name Echo -rpc_name EchoMySelf -json '{"message":"hello"}' [-a] [-t] [-c])" << endl;
+  cout << "myrpct -service_name Echo -rpc_name EchoMySelf -json "
+       << "'{\"message\" : \"hello\"}' [-a] [-t] [-c]" << endl;
   cout << "options:" << endl;
   cout << "    -h,--help     print usage" << endl;
   cout << "    -service_name service name" << endl;
