@@ -209,8 +209,8 @@ void client(int theadId, Stat *curStat, Core::Route route) {
 }
 
 void usage() {
-  cout << R"(myrpcb -service_name Echo -rpc_name EchoMySelf -json '{"message":"hello"}' -t 10 -c 1000 [-a -o -f])"
-       << endl;
+  cout << "myrpcb -service_name Echo -rpc_name EchoMySelf -json "
+       << "'{\"message\":\"hello\"}' -t 10 -c 1000 [-a -o -f]" << endl;
   cout << "options:" << endl;
   cout << "    -h,--help     print usage" << endl;
   cout << "    -service_name service name" << endl;
