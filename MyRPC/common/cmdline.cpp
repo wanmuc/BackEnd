@@ -109,12 +109,12 @@ static int ParseOpt(int argc, char* argv[], int& parseIndex) {
     if (opt[i] == '=') {
       hasArgument = true;
       argument = std::string(opt + i + 1);  // 取等号之后的内容赋值为argument
-      opt[i] = 0;                           // 这样opt指向的字符串就是'='之前的内容。
+      opt[i] = 0;  // 这样opt指向的字符串就是'='之前的内容。
       break;
     }
   }
   std::string optName = std::string(opt);
-  if (optName == "help" || optName == "h") {  // 有help选项，则直接调用_usage函数，并退出
+  if (optName == "help" || optName == "h") {  // 有help选项，则直接调用usage_函数，并退出
     if (usage_) usage_();
     exit(0);
   }
@@ -126,7 +126,7 @@ static int ParseOpt(int argc, char* argv[], int& parseIndex) {
   if (iter->second.IsBoolOpt()) {  // 不需要参数的bool类型选项
     iter->second.SetBoolValue(true);
     parseIndex++;  // parseIndex跳到下一个选项
-  } else {         // 需要参数的选项，参数可能在下一个命令行参数中
+  } else {  // 需要参数的选项，参数可能在下一个命令行参数中
     if (hasArgument) {
       parseIndex++;
     } else {
