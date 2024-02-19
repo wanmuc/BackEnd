@@ -31,7 +31,6 @@ int main(int argc, char* argv[]) {
       continue;
     }
     handlerClient(clientFd);
-    close(clientFd);
   }
   return 0;
 }
