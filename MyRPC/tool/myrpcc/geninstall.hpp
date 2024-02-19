@@ -18,7 +18,7 @@ cp -f ./conf/${PROG}.conf /home/backend/service/${PROG} # 拷贝配置文件
 cp -f ./conf/${PROG}_client.conf /home/backend/route # 发布路由文件
 cp -f ../daemond.sh /home/backend/script/${PROG} # 拷贝启停脚本
 chmod +x /home/backend/script/${PROG}
-chmod +x /home/backend/service/${PROG})";
+chmod +x /home/backend/service/${PROG}/${PROG})";
     return GenFile("install.sh", content);
   }
 };
