@@ -3,23 +3,20 @@
 
 #include <iostream>
 
-bool IsSmall(uint32_t value) {
+bool IsSmall() {
   union Check {
     uint8_t bytes[4];
     uint32_t data;
   };
   Check check;
-  check.data = value;
-  std::cout << "data = " << check.data << std::endl;
-  uint8_t* data = (uint8_t*)&check.data;
-  return data[0] == check.bytes[0] && data[1] == check.bytes[1] && data[2] == check.bytes[2] &&
-         data[3] == check.bytes[3];
+  check.data = 1;
+  return check.bytes[0] == 1;
 }
 
 int main() {
   uint32_t hostValue = 666888;
   bool hostValueIsSmall = false;
-  hostValueIsSmall = IsSmall(hostValue);
+  hostValueIsSmall = IsSmall();
   if (hostValueIsSmall) {
     std::cout << "host byte order is small" << std::endl;
   } else {
