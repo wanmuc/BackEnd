@@ -38,7 +38,7 @@ class RouteInfo {
       ERROR("get Route failed. serviceName[%s]", serviceName.c_str());
       return false;
     }
-    ERROR("get Route success. serviceName[%s]", serviceName.c_str());
+    DEBUG("get Route success. serviceName[%s]", serviceName.c_str());
     if (0 == index) index = rand();
     route = iter->second[index % iter->second.size()];  // 返回的路由信息
     timeOut = time_outs_[serviceName];
